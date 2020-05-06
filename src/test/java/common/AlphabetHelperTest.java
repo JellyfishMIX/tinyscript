@@ -1,5 +1,6 @@
+package common;
+
 import common.AlphabetHelper;
-import common.PeekIterator;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class AlphabetHelperTest {
     @Test
-    // @Disabled
+    @Disabled
     public void test() {
         assertEquals(true, AlphabetHelper.isLetter('a'));
         assertEquals(true, AlphabetHelper.isLetter('b'));
