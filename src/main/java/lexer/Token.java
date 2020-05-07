@@ -68,4 +68,38 @@ public class Token {
 
         return new Token(TokenType.VARIABLE, s);
     }
+
+    public static Token makeString (PeekIterator<Character> it) throws LexicalException {
+        String s = "";
+        int state = 0;
+
+        // while + switch构成一个状态机
+        while (it.hasNext()) {
+            char c = it.next();
+            switch (state) {
+                case 0:
+                    if (c == '\"') {
+                        state = 1;
+                    } else {
+                        state = 2;
+                    }
+                    s += c;
+                    break;
+                case 1:
+                    s += c;
+                    if (c == '"') {
+                        return new Token(TokenType.STRING, s);
+                    }
+                    break;
+                case 2:
+                    s += c;
+                    if (c == '\'') {
+                        return new Token(TokenType.STRING, s);
+                    }
+                    break;
+            }
+        }
+        // 正常情况不会执行到这里，如果执行到这里，说明出现异常
+        throw new LexicalException("Unexpected exception");
+    }
 }
