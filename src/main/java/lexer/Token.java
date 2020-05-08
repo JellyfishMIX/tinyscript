@@ -37,6 +37,14 @@ public class Token {
         return type == TokenType.INTEGER || type == TokenType.STRING || type == TokenType.FLOAT || type ==  TokenType.BOOLEAN;
     }
 
+    public boolean isNumber() {
+        return this.type == TokenType.INTEGER || this.type == TokenType.FLOAT;
+    }
+
+    public boolean isOperator() {
+        return this.type == TokenType.OPERATOR;
+    }
+
     /**
      * 提取变量或关键字
      *
@@ -269,13 +277,13 @@ public class Token {
     }
 
     /**
-     * 提取整型数字
+     * 提取数字（INTEGER或FLOAT）
      *
      * @param it 流单元
      * @return
      * @throws LexicalException
      */
-    public static Token makeInteger(PeekIterator<Character> it) throws LexicalException {
+    public static Token makeNumber(PeekIterator<Character> it) throws LexicalException {
         String s = "";
         int state = 0;
 

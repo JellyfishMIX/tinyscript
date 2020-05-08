@@ -85,7 +85,7 @@ class TokenTest {
 
         for (String testString : testStringArray) {
             var it = new PeekIterator<Character>(testString.chars().mapToObj(x -> (char)x));
-            var token = Token.makeInteger(it);
+            var token = Token.makeNumber(it);
             var splitValue = testString.split("[* ]+");
             assertToken(token, splitValue[0], (testString.indexOf('.') != -1) ? TokenType.FLOAT : TokenType.INTEGER);
         }
