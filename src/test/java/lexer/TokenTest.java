@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author JellyfishMIX
  * @date 2020/5/7 12:54 上午
  */
-public class TokenTest {
+class TokenTest {
     void assertToken(Token token, String value, TokenType type) {
         assertEquals(value, token.getValue());
         assertEquals(type, token.getType());
@@ -18,7 +18,7 @@ public class TokenTest {
 
     @Test
     @Disabled
-    public void test_varOrKeyword() {
+    void test_varOrKeyword() {
         var it1 = new PeekIterator<Character>("if abc".chars().mapToObj(x -> (char)x));
         var it2 = new PeekIterator<Character>("true abc".chars().mapToObj(x -> (char)x));
         var token1 = Token.makeVarOrKeyword(it1);
@@ -35,7 +35,7 @@ public class TokenTest {
 
     @Test
     @Disabled
-    public void test_makeString() throws LexicalException {
+    void test_makeString() throws LexicalException {
         String[] testStringArray = {
                 "\"123\"",
                 "\'123\'"
@@ -45,6 +45,29 @@ public class TokenTest {
             var it = new PeekIterator<Character>(testString.chars().mapToObj(x -> (char)x));
             var token = Token.makeString(it);
             assertToken(token, testString, TokenType.STRING);
+        }
+    }
+
+    @Test
+    // @Disabled
+    void testMakeOperator() throws LexicalException {
+        String[] testStringArray = {
+                "+ xxx",
+                "++mmm",
+                "/=g",
+                "==1",
+                "&=3982",
+                "&777",
+                "||xxxx",
+                "^=111",
+                "%7"
+        };
+        String[] resultStringArray = {"+", "++", "/=", "==", "&=", "&", "||", "^=", "%"};
+        int i = 0;
+        for (String testString : testStringArray) {
+            var it = new PeekIterator<Character>(testString.chars().mapToObj(x -> (char)x));
+            var token = Token.makeOperator(it);
+            assertToken(token, resultStringArray[i++], TokenType.OPERATOR);
         }
     }
 }
