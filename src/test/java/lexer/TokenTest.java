@@ -49,7 +49,7 @@ class TokenTest {
     }
 
     @Test
-    // @Disabled
+    @Disabled
     void testMakeOperator() throws LexicalException {
         String[] testStringArray = {
                 "+ xxx",
@@ -68,6 +68,26 @@ class TokenTest {
             var it = new PeekIterator<Character>(testString.chars().mapToObj(x -> (char)x));
             var token = Token.makeOperator(it);
             assertToken(token, resultStringArray[i++], TokenType.OPERATOR);
+        }
+    }
+
+    @Test
+    @Disabled
+    void testMakeNumber() throws LexicalException {
+        String[] testStringArray = {
+                "+0 aa",
+                "-0 aa",
+                ".3 ccc",
+                ".5555 ddd",
+                "7789.8888 ooo",
+                "-1000.123123*123123",
+        };
+
+        for (String testString : testStringArray) {
+            var it = new PeekIterator<Character>(testString.chars().mapToObj(x -> (char)x));
+            var token = Token.makeInteger(it);
+            var splitValue = testString.split("[* ]+");
+            assertToken(token, splitValue[0], (testString.indexOf('.') != -1) ? TokenType.FLOAT : TokenType.INTEGER);
         }
     }
 }

@@ -8,11 +8,11 @@ public class LexicalException extends Exception {
     private String msg;
 
     public LexicalException(char c) {
-        msg = String.format("Unexpected character %c");
+        msg = String.format("unexpected character %c");
     }
 
-    public LexicalException(String _msg) {
-        this.msg = _msg;
+    public LexicalException(String msg) {
+        this.msg = msg;
     }
 
     @Override
