@@ -359,10 +359,6 @@ public class Token {
             }
             it.next();
             s += lookahead;
-            // 调试
-            if (s.equals("20")) {
-                int i = 0;
-            }
         }
         throw new LexicalException("unexpected error");
     }

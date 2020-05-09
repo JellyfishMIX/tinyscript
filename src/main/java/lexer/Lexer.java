@@ -29,6 +29,27 @@ public class Lexer {
                 continue;
             }
 
+            // 过滤注释
+            if (c == '/') {
+                if (lookahead == '/') {
+                    while (it.hasNext() && it.next() != '\n');
+                } else if (lookahead == '*') {
+                    boolean valid = false;
+                    while (it.hasNext()) {
+                        char p = it.next();
+                        if (p == '*' && it.peek() == '/') {
+                            it.next();
+                            valid = true;
+                            break;
+                        }
+                    }
+                    if (!valid) {
+                        throw new LexicalException("comments not match");
+                    }
+                }
+                continue;
+            }
+
             if (c == '{' || c == '}' || c == '(' || c == ')') {
                 tokens.add(new Token(TokenType.BRACKET, c + ""));
                 continue;
@@ -57,7 +78,7 @@ public class Lexer {
             if ((c == '+' || c == '-' || c == '.') && AlphabetHelper.isNumber(lookahead)) {
                 var lasToken = tokens.size() == 0 ? null : tokens.get(tokens.size() - 1);
 
-                if (lasToken == null || lasToken.isNumber() || lasToken.isOperator()) {
+                if (lasToken == null || !lasToken.isNumber() || lasToken.isOperator()) {
                     it.putBack();
                     tokens.add(Token.makeNumber(it));
                     continue;
