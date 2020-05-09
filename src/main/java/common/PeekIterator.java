@@ -18,7 +18,7 @@ public class PeekIterator<T> implements Iterator<T> {
     // 队列缓存大小
     private final static int CACHE_SIZE = 10;
     // 结束符
-    private T _endToken = null;
+    private T endToken = null;
 
     public PeekIterator(Stream<T> stream) {
         it = stream.iterator();
@@ -26,15 +26,20 @@ public class PeekIterator<T> implements Iterator<T> {
 
     public PeekIterator(Stream<T> stream, T endToken) {
         it = stream.iterator();
-        _endToken = endToken;
+        this.endToken = endToken;
+    }
+
+    public PeekIterator(Iterator<T> it, T endToken) {
+        this.it = it;
+        this.endToken = endToken;
     }
 
     public T peek() {
         if (this.stackPutBacks.size() > 0) {
             return this.stackPutBacks.getFirst();
         }
-        if (!this.hasNext()) {
-            return _endToken;
+        if (!it.hasNext()) {
+            return endToken;
         }
         T val = this.next();
         this.putBack();
@@ -51,7 +56,7 @@ public class PeekIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return _endToken != null || this.stackPutBacks.size() > 0 || it.hasNext();
+        return endToken != null || this.stackPutBacks.size() > 0 || it.hasNext();
     }
 
     @Override
@@ -62,8 +67,8 @@ public class PeekIterator<T> implements Iterator<T> {
             val = this.stackPutBacks.pop();
         } else {
             if (!it.hasNext()) {
-                T tmp = _endToken;
-                _endToken = null;
+                T tmp = endToken;
+                endToken = null;
                 return tmp;
             }
             val = it.next();

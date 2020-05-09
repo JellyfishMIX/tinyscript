@@ -4,6 +4,7 @@ import common.AlphabetHelper;
 import common.PeekIterator;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 /**
  * @author JellyfishMIX
@@ -17,7 +18,7 @@ public class Lexer {
         while(it.hasNext()) {
             char c = it.next();
 
-            // 本编译器中，流的末尾会加一个0表示流结束
+            // 本编译器中，流的末尾会加一个ascii 0表示流结束
             if (c == 0) {
                 break;
             }
@@ -39,6 +40,18 @@ public class Lexer {
                 continue;
             }
 
+            if (AlphabetHelper.isLetter(c)) {
+                it.putBack();
+                tokens.add(Token.makeVarOrKeyword(it));
+                continue;
+            }
+
+            if (AlphabetHelper.isNumber(c)) {
+                it.putBack();
+                tokens.add(Token.makeNumber(it));
+                continue;
+            }
+
             // 可能出现包含+ - .的数字
             // +-: 3 + 5; +5; 3 * -5
             if ((c == '+' || c == '-' || c == '.') && AlphabetHelper.isNumber(lookahead)) {
@@ -54,10 +67,17 @@ public class Lexer {
             if (AlphabetHelper.isOperator(c)) {
                 it.putBack();
                 tokens.add(Token.makeOperator(it));
+                continue;
             }
 
             throw new LexicalException(c);
         }
         return tokens;
+    }
+
+    // 重载，方便传参
+    public ArrayList<Token> analyse(Stream source) throws LexicalException {
+        var it = new PeekIterator<Character>(source, (char)0);
+        return this.analyse(it);
     }
 }

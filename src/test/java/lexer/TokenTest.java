@@ -18,7 +18,7 @@ class TokenTest {
 
     @Test
     @Disabled
-    void test_varOrKeyword() {
+    void testMakeVarOrKeyword() {
         var it1 = new PeekIterator<Character>("if abc".chars().mapToObj(x -> (char)x));
         var it2 = new PeekIterator<Character>("true abc".chars().mapToObj(x -> (char)x));
         var token1 = Token.makeVarOrKeyword(it1);
@@ -35,7 +35,7 @@ class TokenTest {
 
     @Test
     @Disabled
-    void test_makeString() throws LexicalException {
+    void testMakeString() throws LexicalException {
         String[] testStringArray = {
                 "\"123\"",
                 "\'123\'"

@@ -357,8 +357,12 @@ public class Token {
                     }
                     break;
             }
-            s += lookahead;
             it.next();
+            s += lookahead;
+            // 调试
+            if (s.equals("20")) {
+                int i = 0;
+            }
         }
         throw new LexicalException("unexpected error");
     }
