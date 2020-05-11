@@ -1,4 +1,4 @@
-package paser;
+package parser.ast;
 
 /**
  * @author JellyfishMIX

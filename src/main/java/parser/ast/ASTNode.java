@@ -1,4 +1,4 @@
-package paser;
+package parser.ast;
 
 import lexer.Token;
 
