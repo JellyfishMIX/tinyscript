@@ -1,6 +1,7 @@
 package parser.ast;
 
 import lexer.Token;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +54,43 @@ public abstract class ASTNode {
         children.add(node);
     }
 
+    public List<ASTNode> getChildren() {
+        return children;
+    }
+
     public Token getLexeme() {
         return lexeme;
     }
 
-    public List<ASTNode> getChildren() {
-        return children;
+    public void setLexeme(Token lexeme) {
+        this.lexeme = lexeme;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public ASTNodeType getType() {
+        return type;
+    }
+
+    public void setType(ASTNodeType type) {
+        this.type = type;
+    }
+
+    /**
+     * 打印，查看抽象语法树的形状
+     *
+     * @param indent 起始缩进
+     */
+    public void print(int indent) {
+        System.out.println(StringUtils.leftPad(" ", indent * 2) + label);
+        for (ASTNode child : children) {
+            child.print(indent + 1);
+        }
     }
 }

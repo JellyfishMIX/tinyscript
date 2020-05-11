@@ -5,7 +5,7 @@ package parser.ast;
  * @date 2020/5/10 6:12 下午
  */
 public class Expr extends ASTNode {
-    Expr(ASTNode parent) {
+    public Expr(ASTNode parent) {
         super(parent);
     }
 }
