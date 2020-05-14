@@ -14,7 +14,7 @@ public enum ASTNodeType {
      */
     BINARY_EXPR,
     /**
-     * 单项表达式，++i
+     * 单项表达式，++i, (i)
      */
     UNARY_EXPR,
     /**

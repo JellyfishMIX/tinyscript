@@ -3,6 +3,8 @@ package lexer;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -74,6 +76,15 @@ class LexerTest {
         var source = "/*this is a test\n happy123* */ a=1";
         var lexer = new Lexer();
         var tokens = lexer.analyse(source.chars().mapToObj(x -> (char)x));
+        assertEquals(3, tokens.size());
+    }
+
+    @Test
+    @Disabled
+    void testMultiply() throws LexicalException {
+        String source = "1*2";
+        Lexer lexer = new Lexer();
+        ArrayList<Token> tokens = lexer.analyse(source.chars().mapToObj(x -> (char)x));
         assertEquals(3, tokens.size());
     }
 }

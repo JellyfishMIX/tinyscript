@@ -197,6 +197,7 @@ public class Token {
                         return new Token(TokenType.OPERATOR, "*=");
                     } else {
                         it.putBack();
+                        return new Token(TokenType.OPERATOR, "*");
                     }
                 case 4:
                     if (lookahead == '=') {
