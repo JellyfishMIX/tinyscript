@@ -35,17 +35,19 @@ class ParseExprTest {
     }
 
     @Test
-    // @Disabled
+    @Disabled
     void complex() throws LexicalException, ParseException {
         ASTNode expr0 = createExpr("1*2");
         ASTNode expr1 = createExpr("1+2*3");
         ASTNode expr2 = createExpr("1*2+3");
         ASTNode expr3 = createExpr("10 * (7+4)");
+        ASTNode expr4 = createExpr("(1*2!=7)==3!=4*5+6");
 
         assertEquals("1 2 *", ParserUtils.toPostfixExpression(expr0));
         assertEquals("1 2 3 * +", ParserUtils.toPostfixExpression(expr1));
         assertEquals("1 2 * 3 +", ParserUtils.toPostfixExpression(expr2));
         assertEquals("10 7 4 + *", ParserUtils.toPostfixExpression(expr3));
+        assertEquals("1 2 * 7 != 3 4 5 * 6 + != ==", ParserUtils.toPostfixExpression(expr4));
     }
 
     private ASTNode createExpr(String src) throws LexicalException, ParseException {

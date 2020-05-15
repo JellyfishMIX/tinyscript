@@ -232,7 +232,7 @@ public class Token {
                         return new Token(TokenType.OPERATOR, "=");
                     }
                 case 8:
-                    if (lookahead == '!') {
+                    if (lookahead == '=') {
                         return new Token(TokenType.OPERATOR, "!=");
                     } else {
                         it.putBack();

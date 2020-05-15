@@ -74,9 +74,9 @@ public class Expr extends ASTNode {
     private static ASTNode F(ASTNode parent, PeekTokenIterator it) {
         Token token = it.peek();
         if (token.isVariable()) {
-            return new Variable(parent, it);
+            return new Variable(parent, token);
         } else {
-            return new Scalar(parent, it);
+            return new Scalar(parent, token);
         }
     }
 
@@ -109,5 +109,9 @@ public class Expr extends ASTNode {
 
     public static ASTNode parse(PeekTokenIterator it) throws ParseException {
         return E(null, it, 0);
+    }
+
+    public static ASTNode parse(ASTNode parent, PeekTokenIterator it) throws ParseException {
+        return E(parent, it, 0);
     }
 }
