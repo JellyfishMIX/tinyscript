@@ -8,7 +8,7 @@ import parser.util.PeekTokenIterator;
  * @date 2020/5/10 6:08 下午
  */
 public class Scalar extends Factor {
-    public Scalar(ASTNode parent, Token token) {
-        super(parent, token);
+    public Scalar(ASTNode parent, PeekTokenIterator it) {
+        super(parent, it);
     }
 }
