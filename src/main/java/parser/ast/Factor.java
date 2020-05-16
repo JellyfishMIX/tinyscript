@@ -1,6 +1,5 @@
 package parser.ast;
 
-import lexer.Token;
 import lexer.TokenType;
 import parser.util.PeekTokenIterator;
 
@@ -22,27 +21,4 @@ public abstract class Factor extends ASTNode {
         this.label = token.getValue();
         this.lexeme = token;
     }
-
-    // public Factor(ASTNode parent, PeekTokenIterator it) {
-    //     Token token = it.peek();
-    //     TokenType type = token.getType();
-    //
-    //     if (type == TokenType.VARIABLE) {
-    //         it.next();
-    //         return new Variable(parent, it);
-    //     } else if (token.isScalar()) {
-    //         it.next();
-    //         return new Scalar(parent, it);
-    //     }
-    //
-    //     super(parent);
-    //     this.label = token.getValue();
-    //     this.lexeme = token;
-    // }
-    //
-    // public static ASTNode parse(ASTNode parent, PeekTokenIterator it) {
-    //     Token token = it.peek();
-    //     TokenType type = token.getType();
-    //     return null;
-    // }
 }
