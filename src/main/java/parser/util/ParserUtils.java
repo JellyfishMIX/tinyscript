@@ -8,8 +8,11 @@ import parser.ast.ASTNode;
  * @date 2020/5/14 10:36 上午
  */
 public class ParserUtils {
-    // Prefix
-    // Postfix
+    /**
+     * Postfix
+     * @param node 抽象语法树上的节点
+     * @return
+     */
     public static String toPostfixExpression(ASTNode node) {
         // left op right -> left right op
         String leftStr = "";

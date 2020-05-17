@@ -20,40 +20,40 @@ import static org.junit.jupiter.api.Assertions.*;
  * @date 2020/5/14 10:48 上午
  */
 class ParseExprTest {
-    // @Test
+    @Test
     // @Disabled
-    // void simple() throws LexicalException, ParseException {
-    //     ASTNode expr = createExpr("1+1+1");
-    //     assertEquals("1 1 1 + +", ParserUtils.toPostfixExpression(expr));
-    // }
-    //
-    // @Test
+    void simple() throws LexicalException, ParseException {
+        ASTNode expr = createExpr("1+1+1");
+        assertEquals("1 1 1 + +", ParserUtils.toPostfixExpression(expr));
+    }
+
+    @Test
     // @Disabled
-    // void simple1() throws LexicalException, ParseException {
-    //     ASTNode expr = createExpr("\"1\" == \"\"");
-    //     assertEquals("\"1\" \"\" ==", ParserUtils.toPostfixExpression(expr));
-    // }
-    //
-    // @Test
+    void simple1() throws LexicalException, ParseException {
+        ASTNode expr = createExpr("\"1\" == \"\"");
+        assertEquals("\"1\" \"\" ==", ParserUtils.toPostfixExpression(expr));
+    }
+
+    @Test
     // @Disabled
-    // void complex() throws LexicalException, ParseException {
-    //     ASTNode expr0 = createExpr("1*2");
-    //     ASTNode expr1 = createExpr("1+2*3");
-    //     ASTNode expr2 = createExpr("1*2+3");
-    //     ASTNode expr3 = createExpr("10 * (7+4)");
-    //     ASTNode expr4 = createExpr("(1*2!=7)==3!=4*5+6");
-    //
-    //     assertEquals("1 2 *", ParserUtils.toPostfixExpression(expr0));
-    //     assertEquals("1 2 3 * +", ParserUtils.toPostfixExpression(expr1));
-    //     assertEquals("1 2 * 3 +", ParserUtils.toPostfixExpression(expr2));
-    //     assertEquals("10 7 4 + *", ParserUtils.toPostfixExpression(expr3));
-    //     assertEquals("1 2 * 7 != 3 4 5 * 6 + != ==", ParserUtils.toPostfixExpression(expr4));
-    // }
-    //
-    // private ASTNode createExpr(String src) throws LexicalException, ParseException {
-    //     Lexer lexer = new Lexer();
-    //     ArrayList<Token> tokens = lexer.analyse(src.chars().mapToObj(x -> (char)x));
-    //     PeekTokenIterator tokenIt = new PeekTokenIterator(tokens.stream());
-    //     return Expr.parse(tokenIt);
-    // }
+    void complex() throws LexicalException, ParseException {
+        ASTNode expr0 = createExpr("1*2");
+        ASTNode expr1 = createExpr("1+2*3");
+        ASTNode expr2 = createExpr("1*2+3");
+        ASTNode expr3 = createExpr("10 * (7+4)");
+        ASTNode expr4 = createExpr("(1*2!=7)==3!=4*5+6");
+
+        assertEquals("1 2 *", ParserUtils.toPostfixExpression(expr0));
+        assertEquals("1 2 3 * +", ParserUtils.toPostfixExpression(expr1));
+        assertEquals("1 2 * 3 +", ParserUtils.toPostfixExpression(expr2));
+        assertEquals("10 7 4 + *", ParserUtils.toPostfixExpression(expr3));
+        assertEquals("1 2 * 7 != 3 4 5 * 6 + != ==", ParserUtils.toPostfixExpression(expr4));
+    }
+
+    private ASTNode createExpr(String src) throws LexicalException, ParseException {
+        Lexer lexer = new Lexer();
+        ArrayList<Token> tokens = lexer.analyse(src.chars().mapToObj(x -> (char)x));
+        PeekTokenIterator tokenIt = new PeekTokenIterator(tokens.stream());
+        return Expr.parse(tokenIt);
+    }
 }
